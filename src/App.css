@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+  font-family: system-ui;
+  /* min-height: 100vh; */
+  /* min-width: 100%; */
+  /* max-width: 100%; */
+}
+
+.App-link {
+  color: #20ac30;
+}
+
+/* keep thew two */
+.navbar-default {
+  background-color: rgb(59, 128, 73);
+  border-color: #E7E7E7;
+}
+
+.App{
+  background-color: white;
+}
