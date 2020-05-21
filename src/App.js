@@ -115,8 +115,7 @@ class App extends Component {
 
   render() {
     return ( 
-      <div className = "App" >
-        <div className="">
+      <div className="App">
           {/* <ToastContainer
             ref={ref => container = ref}
             className="toast-top-bottom"
@@ -127,44 +126,40 @@ class App extends Component {
 
           <div>
             {/* landing page/website welcome  */}
-            <div>
-              <div className="row">
-                {/* column that had the icon */}
-                <div className="col-sm bg-black">
-                  {/* controls the size of the icon */}
-                  <div style={{fontSize: "30px"}}>
-                    <FontAwesomeIcon icon={faSpotify} size="10x" />
-                  </div>
-                </div>
+            <div className="outer">
+              <div className="containerTest">
+                    {/* controls the size of the icon */}
+                    <div className="left" >
+                      <FontAwesomeIcon icon={faSpotify} size="10x" style={{paddingBottom: "10%"}}/>
+                    </div>
 
-                <div className="col-sm" >
-                  <div>
-                    {
-                      !this.state.token && ( 
-                        <div>
-                          <h4>Guess That Year is a game that uses Spotify's Api to display
-                            album covers from a user's saved albums list. The objective of 
-                            the game is to guess what year the album was released. How well
-                            do you know your music?<br/><br/>
-                            <small>
-                              Note: To play the game a user must have a Spotify account and albums
-                              saved. 
-                            </small>
-                          </h4>
+                    <div style={{maxWidth: "50%"}}>
+                      {
+                        !this.state.token && ( 
+                          <div style={{width: "300px"}}>
+                            <h4>Guess That Year is a game that uses Spotify's Api to display
+                              album covers from a user's saved albums list. The objective of 
+                              the game is to guess what year the album was released. How well
+                              do you know your music?<br/><br/>
+                              <small>
+                                Note: To play the game a user must have a Spotify account and albums
+                                saved. 
+                              </small>
+                            </h4>
 
-                          <a className = "btn btn-primary btn--loginApp-link"
-                            href = {
-                              `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`
-                            } >
-                          Login to Spotify </a>
-                        </div>
-                      )
-                    } 
-                  </div>
-                </div>
+                            <a className = "btn btn-primary btn--loginApp-link"
+                              href = {
+                                `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`
+                              } >
+                            Login to Spotify </a>
+                          </div>
+                        )
+                      } 
+                    </div>
               </div>
             </div>
-          {
+          </div> 
+          {/* {
             this.state.token
             && this.state.albums.length !== 0
             && (
@@ -175,8 +170,9 @@ class App extends Component {
                 />
                 </div>
             )
-          }
-          </div> 
+          } */}
+        <div class="footer">
+          <p>Footer</p>
         </div>
       </div>
     );
