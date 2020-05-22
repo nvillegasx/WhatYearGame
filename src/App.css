@@ -46,3 +46,16 @@
   top: 50%;
 }
 
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  /* padding-top: 10%; */
+}
+
+.centerInfo {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  /* padding-top: 10%; */
+}
