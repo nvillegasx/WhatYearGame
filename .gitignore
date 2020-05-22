@@ -1,2 +1,4 @@
 node_modules
 src/config.js
+.DS_Store
+README 2.md
