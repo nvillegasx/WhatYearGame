@@ -1,16 +1,12 @@
-// import React from "react";
 import React, { Component } from 'react'
 import toastr from 'toastr'
 import "./Player.css";
 // import { ToastContainer } from "react-toastr"
 
-// let container; 
-
 class Player extends Component {
   constructor() {
     super();
     this.state = {
-      // fullList: this.props.tracks,
       gameList: [],
       selectedAlbum: null,
       gameStart: true,
@@ -92,26 +88,27 @@ class Player extends Component {
   }
 
   finishGame = () =>{
-
+// TODO
   }
 
   render() {
     return (
-      <div className="center">
+      <div className="center" style={{height: "500px", width: "300px"}}>
         
-        <div >
-          {/* <ToastContainer
-              ref={ref => container = ref}
-              className="toast-top-center"
-            /> */}
-          <div className="now-playing__img">
+        <div>
+          <div className="center" style={{width: "300px"}}>
               { this.state.selectedAlbum
               &&
               <div>
-                <img src={this.state.selectedAlbum.images[0].url} />
-                <div className="right">
-                  <label name="userInput">What year was this ablum released?</label>
-                  <input type="number" name="userInput"required  value={this.state.userInput} minLength="4" max="2020" onChange={((e)=>this.setUserInput(e.target.value))}></input>
+                <div className="row">
+                  <div style={{width: "500px"}}>
+                    <img alt="album" src={this.state.selectedAlbum.images[0].url} />
+                  </div>
+
+                  <div>
+                    <label name="userInput">What year was this ablum released?</label>
+                    <input type="number" name="userInput"required  value={this.state.userInput} minLength="4" max="2020" onChange={((e)=>this.setUserInput(e.target.value))}></input>
+                  </div>
                 </div>
               </div> 
               }

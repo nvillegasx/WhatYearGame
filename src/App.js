@@ -8,7 +8,6 @@ import $ from "jquery"
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
 import axios from "axios"
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome'
-import { faCoffee, } from '@fortawesome/free-solid-svg-icons'
 import { faSpotify, } from '@fortawesome/free-brands-svg-icons'
 
 // const element = <FontAwesomeIcon icon={faCoffee} />

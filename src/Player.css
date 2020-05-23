@@ -1,4 +1,4 @@
-/** Now Playing **/
+/* * Now Playing *
 .now-playing__name {
     font-size: 1.5em;
     margin-bottom: 0.2em;
@@ -18,7 +18,7 @@
     margin-left: 5%;
     width: 45%;
   }/** Progress **/
-  .progress {
+  /* .progress {
     border: 1px solid #eee;
     height: 6px;
     border-radius: 3px;
@@ -26,13 +26,18 @@
   }.progress__bar {
     background-color: #eee;
     height: 4px;
+  } */
+
+  .now-playing{
+    width: 300px;
   }
+  /*
   .right {
     float: right;
     width: 300px;
     border: 3px solid #73AD21;
     padding: 10px;
-  }
+  } */
 
   /* .center {
     padding: 70px 0;
