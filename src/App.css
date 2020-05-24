@@ -1,15 +1,12 @@
 .App {
   text-align: center;
   font-family: system-ui;
-  /* min-height: 100vh; */
-  /* min-width: 100%; */
-  /* max-width: 100%; */
 }
 
 .App-link {
   color: #20ac30;
 }
-/* keep thew two */
+
 .navbar-default {
   background-color: rgb(59, 128, 73);
   border-color: #E7E7E7;
@@ -50,12 +47,4 @@
   margin: auto;
   width: 50%;
   padding: 10px;
-  /* padding-top: 10%; */
-}
-
-.centerInfo {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  /* padding-top: 10%; */
 }

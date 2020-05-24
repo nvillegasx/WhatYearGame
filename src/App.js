@@ -10,12 +10,6 @@ import axios from "axios"
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome'
 import { faSpotify, } from '@fortawesome/free-brands-svg-icons'
 
-// const element = <FontAwesomeIcon icon={faCoffee} />
-// import spotifyImage from "./images/kanye.jpg"
-// import { ToastContainer } from "react-toastr"
-
-// let container; 
-
 class App extends Component {
   constructor() {
       super();
@@ -72,14 +66,10 @@ class App extends Component {
         console.log(data)
         this.setState({
           item: data.item,
-          // is_playing: data.is_playing,
-          // progress_ms: data.progress_ms,
           albums: data.items
         });
       },
       error: (xhr, ajaxOptions, thrownError)=> {
-        // alert(xhr.status);
-        // alert(thrownError);
         console.log(xhr.responseText)
         console.log(thrownError)
       }
@@ -127,7 +117,7 @@ class App extends Component {
             !this.state.token && ( 
               <div class="center">
                 <FontAwesomeIcon icon={faSpotify} size="10x" />
-                <div className="centerInfo">
+                <div className="center">
                   <div style={{width: "300px"}}>
                     <h4>Guess That Year is a game that uses Spotify's Api to display
                     album covers from a user's saved albums list. The objective of 

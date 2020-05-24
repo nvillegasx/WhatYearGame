@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import toastr from 'toastr'
 import "./Player.css";
-// import { ToastContainer } from "react-toastr"
 
 class Player extends Component {
   constructor() {
