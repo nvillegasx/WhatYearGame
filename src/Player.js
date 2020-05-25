@@ -10,6 +10,7 @@ class Player extends Component {
       selectedAlbum: null,
       gameStart: true,
       userInput: "",
+      gameOver: false
 
   };
   }
@@ -21,11 +22,18 @@ class Player extends Component {
 
   setAlbum = () => {
     //get index
-    let selectedIndex = this.getRandomIndex(this.state.gameList.length)
-
-    this.setState({ selectedAlbum: this.state.gameList[selectedIndex].album})
-
-    this.updateValidAlbums(selectedIndex)
+    let remainingRounds = this.state.gameList.length
+    if( remainingRounds > 0)
+    {
+      let selectedIndex = this.getRandomIndex(remainingRounds)
+  
+      this.setState({ selectedAlbum: this.state.gameList[selectedIndex].album})
+  
+      this.updateValidAlbums(selectedIndex)
+    }
+    else{
+      this.setState({ gameOver: true})
+    }
 
   }
 
@@ -114,6 +122,12 @@ class Player extends Component {
 
               {
                 this.gameList === undefined && this.displayButtons()
+              }
+              {
+                this.state.gameOver &&
+                <div>
+                  <h2>Game Over</h2>
+                </div>
               }
           </div>
         </div>
