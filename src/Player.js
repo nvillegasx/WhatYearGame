@@ -10,7 +10,9 @@ class Player extends Component {
       selectedAlbum: null,
       gameStart: true,
       userInput: "",
-      gameOver: false
+      gameOver: false,
+      numOfCorrect: 0,
+      totalAnswered: 0,
 
   };
   }
@@ -78,10 +80,14 @@ class Player extends Component {
 
   checkUserAnswer = () =>{
     const albumYear = this.state.selectedAlbum.release_date.substring(0,4)
+    let newCorrect = this.state.numOfCorrect
+    let totalAnswered = this.state.totalAnswered
+    
     if(this.state.userInput === albumYear)
     {
       console.log("correct answer")
       toastr.success(`The album was released in ${albumYear}`, 'Correct!')
+      this.setState({ numOfCorrect: newCorrect+1 })
       // this.props.container.success(`The album was released in ${albumYear}`, 'Correct', { closeButton: true })
     }
     else{
@@ -91,11 +97,7 @@ class Player extends Component {
     }
 
     this.setAlbum()
-    this.setState({userInput: ""})
-  }
-
-  finishGame = () =>{
-// TODO
+    this.setState({userInput: "", totalAnswered: totalAnswered+1})
   }
 
   render() {
@@ -104,7 +106,8 @@ class Player extends Component {
         
         <div>
           <div className="center" style={{width: "300px"}}>
-              { this.state.selectedAlbum
+              { !this.state.gameOver
+              && this.state.selectedAlbum
               &&
               <div>
                 <div className="row">
@@ -121,7 +124,7 @@ class Player extends Component {
               }
 
               {
-                this.gameList === undefined && this.displayButtons()
+               !this.state.gameOver && this.gameList === undefined && this.displayButtons()
               }
               {
                 this.state.gameOver &&

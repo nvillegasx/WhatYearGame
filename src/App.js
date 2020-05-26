@@ -153,7 +153,7 @@ class App extends Component {
             )
           }
         <div class="footer">
-          <p>Footer</p>
+          <p>By: Nathaniel Villegas</p>
         </div>
       </div>
     );

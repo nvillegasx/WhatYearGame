@@ -17,7 +17,7 @@ li {
     font-size: 24px;
     line-height: 18px;
     float: left;
-    color: #FFF;
+    color: rgb(255, 255, 255);
     padding-right: 0.5em;
     margin: auto 0.5em auto -1.5em;
 }        
