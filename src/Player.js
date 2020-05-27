@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import toastr from 'toastr'
+// import toastr from 'toastr'
+import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import "./Player.css";
 
 class Player extends Component {
@@ -20,7 +22,7 @@ class Player extends Component {
     this.setState({ gameList: this.props.albums})
     if(this.state.gameList.length > 0)
       this.setAlbum()
-  }
+    }
 
   setAlbum = () => {
     //get index
@@ -54,7 +56,7 @@ class Player extends Component {
     {
       return <div>
         <div className="">
-          <button className="btn btn-success btn-lg"onClick={()=>this.startGame()}>Start</button>
+          <button className="btn btn-success btn-lg"onClick={()=>this.startGame()}>Set up Albums</button>
         </div>
       </div>
     }
@@ -86,13 +88,33 @@ class Player extends Component {
     if(this.state.userInput === albumYear)
     {
       console.log("correct answer")
-      toastr.success(`The album was released in ${albumYear}`, 'Correct!')
+      // toastr.success(`The album was released in ${albumYear}`, 'Correct!')
       this.setState({ numOfCorrect: newCorrect+1 })
+      toast.success(`Correct! The album was released in ${albumYear}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       // this.props.container.success(`The album was released in ${albumYear}`, 'Correct', { closeButton: true })
     }
     else{
       console.log("wrong answer")
-      toastr.error(`The album was released in ${albumYear}`, 'Incorrect!')
+      // toastr.error(`The album was released in ${albumYear}`, 'Incorrect!')
+      // toast("wow so easy")
+      toast.error(`Incorrect! The album was released in ${albumYear}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+
       // this.props.container.error(`The album was released in ${albumYear}`, 'Incorrect', { closeButton: true })
     }
 
@@ -103,7 +125,6 @@ class Player extends Component {
   render() {
     return (
       <div className="center" style={{height: "500px", width: "300px"}}>
-        
         <div>
           <div className="center" style={{width: "300px"}}>
               { !this.state.gameOver

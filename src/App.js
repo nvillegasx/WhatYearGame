@@ -9,6 +9,8 @@ import { authEndpoint, clientId, redirectUri, scopes } from "./config";
 import axios from "axios"
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome'
 import { faSpotify, } from '@fortawesome/free-brands-svg-icons'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   constructor() {
@@ -112,6 +114,10 @@ class App extends Component {
           <nav class="navbar navbar-default">
             <span class="navbar-brand mb-0 h1" style={{color: "white"}}><h1>Guess That Year!</h1></span>
           </nav>
+          <div>
+          {/* <button onClick={notify}>Notify !</button> */}
+          <ToastContainer />
+        </div>
 
           {
             !this.state.token && ( 
