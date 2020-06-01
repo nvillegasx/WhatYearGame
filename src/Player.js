@@ -50,13 +50,16 @@ class Player extends Component {
     newList.splice(index, 1)
     this.setState({ gameList: newList})
   }
-
+// allow users to play with what they'd like
+// playlist albums
+// artist
+// like songs
   displayButtons = () => {
     if(this.state.gameStart === true)
     {
       return <div>
         <div className="">
-          <button className="btn btn-success btn-lg"onClick={()=>this.startGame()}>Set up Albums</button>
+          <button className="btn btn-success btn-lg"onClick={()=>this.startGame()}>Set up Game</button>
         </div>
       </div>
     }

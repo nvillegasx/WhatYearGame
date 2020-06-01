@@ -124,7 +124,7 @@ class App extends Component {
               <div class="center">
                 <FontAwesomeIcon icon={faSpotify} size="10x" />
                 <div className="center">
-                  <div style={{width: "300px"}}>
+                  <div style={{width: "100%"}}>
                     <h4>Guess That Year is a game that uses Spotify's Api to display
                     album covers from a user's saved albums list. The objective of 
                     the game is to guess what year the album was released. How well
@@ -146,15 +146,38 @@ class App extends Component {
               )
             } 
 
+{/* TODO user selects what type of game they want to play with  */}
+          {/* {
+            this.state.token
+            &&
+            (<div className="container center">
+              <div className="row">
+                <div className="col-lg colButton">
+                  <button className="btn btn-lg btn-warning btn-block">Albums</button>
+                </div>
+                <div className="col-lg colButton">
+                  <button className="btn btn-lg btn-warning btn-block">Artists</button>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-lg colButton">
+                  Playlist
+                </div>
+                <div className="col-lg colButton">
+                  Liked Songs
+                </div>
+              </div>
+            </div>)
+          } */}
           {
             this.state.token
             && this.state.albums.length !== 0
             && (
               <div>
 
-              <Player
-                albums={this.state.albums}
-                />
+                <Player
+                  albums={this.state.albums}
+                  />
                 </div>
             )
           }
