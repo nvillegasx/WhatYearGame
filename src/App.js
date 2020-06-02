@@ -29,7 +29,8 @@ class App extends Component {
       progress_ms: 0,
       albums: [],
       selectedHref: "",
-      tracks: []
+      data: [],
+      gameType: "",
     };
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
 
@@ -87,19 +88,34 @@ class App extends Component {
         token: _token
       });
     }
-    this.getCurrentlyPlaying(_token);
+    // this.getCurrentlyPlaying(_token);
   }
 
-  getPlaylistSongs = () => {
+  selectGamePlay = (gameType) => {
+// {/* /v1/albums */}
+    if(gameType === "albums")
+      this.getGameData('albums?limit=50')
+    else
+      this.getGameData(`${gameType}`)
+    //  {/* /v1/me/tracks */}
+    // {/* /v1/me/playlists */}
+  }
+
+  getGameData = (url) => {
+    console.log(this.state.token)
+    console.log(url)
     axios({
+      url: `https://api.spotify.com/v1/me/${url}`,
       method: 'get',
-      url: this.state.selectedHref,
-      headers: { Authorization: "Bearer " + this.state.token}
+      headers: { 
+        'Authorization': 'Bearer ' + this.state.token,
+        'Content-Type' : 'application/json'
+      }
     }).then((response) => {
       console.log("Test")
       console.log(response)
-      this.setState({ tracks: response.data.tracks.items })
-      console.log(this.state.tracks)
+      this.setState({ data: response.data.items })
+      console.log(this.state.data)
     }
     )
   }
@@ -107,10 +123,6 @@ class App extends Component {
   render() {
     return ( 
       <div className="App">
-          {/* <ToastContainer
-            ref={ref => container = ref}
-            className="toast-top-bottom"
-          /> */}
           <nav class="navbar navbar-default">
             <span class="navbar-brand mb-0 h1" style={{color: "white"}}><h1>Guess That Year!</h1></span>
           </nav>
@@ -130,8 +142,7 @@ class App extends Component {
                     the game is to guess what year the album was released. How well
                     do you know your music?<br/><br/>
                     <small>
-                    Note: To play the game a user must have a Spotify account and albums
-                    saved. 
+                    Note: To play the game a user must have a Spotify account.
                     </small>
                     </h4>
                     
@@ -146,32 +157,46 @@ class App extends Component {
               )
             } 
 
-{/* TODO user selects what type of game they want to play with  */}
-          {/* {
-            this.state.token
-            &&
-            (<div className="container center">
-              <div className="row">
-                <div className="col-lg colButton">
-                  <button className="btn btn-lg btn-warning btn-block">Albums</button>
-                </div>
-                <div className="col-lg colButton">
-                  <button className="btn btn-lg btn-warning btn-block">Artists</button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg colButton">
-                  Playlist
-                </div>
-                <div className="col-lg colButton">
-                  Liked Songs
-                </div>
-              </div>
-            </div>)
-          } */}
           {
             this.state.token
-            && this.state.albums.length !== 0
+            && this.state.data.length === 0
+            &&
+            (<div className="container center">
+              <h2>Choose what you would like to use to play the game:</h2>
+              <small>
+                    Note: The user must have saved albums, liked songs or created playlist.
+                    </small>
+              <div className="row">
+                {/* /v1/albums */}
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay('albums')}>
+                  <h2>Albums</h2>
+                </div>
+                {/* /v1/me/tracks */}
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay('tracks')}>
+                  <h2>
+                    Liked Songs
+                  </h2>
+                </div>
+              </div>
+              <div className="row">
+                {/* /v1/me/playlists */}
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay('playlists')}>
+                  <h2>
+                    Playlists
+                  </h2>
+                </div>
+                {/* /v1/me/tracks
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay()}>
+                  <h2>
+                    Liked Songs
+                  </h2>
+                </div> */}
+              </div>
+            </div>)
+          }
+          {
+            this.state.token 
+            && this.state.data.length !== 0
             && (
               <div>
 

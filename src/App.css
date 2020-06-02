@@ -50,10 +50,12 @@
 }
 
 .colButton {
-  /* height: 50%; */
   padding: 5% 5%;
-  background-color: darkcyan;
+  background-color: rgb(33, 81, 212);
   margin: 5% 5%;
   border-radius: 25px;
-  /* background: #73AD21; */
+  color: white;
+}
+.colButton:hover {
+  background-color: rgba(33, 81, 212, 0.801);
 }
