@@ -17,68 +17,14 @@ class App extends Component {
       super();
       this.state = {
         token: null,
-      item: {
-        album: {
-          images: [{ url: "" }]
-        },
-        name: "",
-        artists: [{ name: "" }],
-        duration_ms:0,
-      },
-      is_playing: "Paused",
-      progress_ms: 0,
-      albums: [],
-      selectedHref: "",
-      data: [],
-      gameType: "",
+        data: [],
+        gameType: "",
+        retrievedData: false,
+        selectedPlaylist: ""
     };
-    this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
-
   }
 
-  // getCurrentlyPlaying = (token) => {
-  //   // Make a call using the token
-  //   $.ajax({
-  //     url: "https://api.spotify.com/v1/me/player",
-  //     type: "GET",
-  //     beforeSend: (xhr) => {
-  //       xhr.setRequestHeader("Authorization", "Bearer " + token);
-  //     },
-  //     success: (data) => {
-  //       this.setState({
-  //         item: data.item,
-  //         is_playing: data.is_playing,
-  //         progress_ms: data.progress_ms,
-  //       });
-  //     }
-  //   });
-
-  //   console.log(this.state)
-  // }
-
-  // gets the pl
-  getCurrentlyPlaying(token) {
-    // Make a call using the token
-    $.ajax({
-      url: "https://api.spotify.com/v1/me/albums?limit=50",
-      type: "GET",
-      beforeSend: xhr => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      },
-      success: data => {
-        console.log(data)
-        this.setState({
-          item: data.item,
-          albums: data.items
-        });
-      },
-      error: (xhr, ajaxOptions, thrownError)=> {
-        console.log(xhr.responseText)
-        console.log(thrownError)
-      }
-    });
-  }
-
+  // Stores the token to make the API call to Spotify
   componentDidMount() {
     // Set token
     let _token = hash.access_token;
@@ -88,19 +34,19 @@ class App extends Component {
         token: _token
       });
     }
-    // this.getCurrentlyPlaying(_token);
   }
 
+  // Gets the data based on the game type the user selected
+  // If playlist is chosen the user will get another option to 
+  // select the playlist they would like to use
   selectGamePlay = (gameType) => {
-// {/* /v1/albums */}
     if(gameType === "albums")
       this.getGameData('albums?limit=50')
     else
       this.getGameData(`${gameType}`)
-    //  {/* /v1/me/tracks */}
-    // {/* /v1/me/playlists */}
   }
 
+  // API call to spotify to retrieve the data to play the game
   getGameData = (url) => {
     console.log(this.state.token)
     console.log(url)
@@ -112,10 +58,10 @@ class App extends Component {
         'Content-Type' : 'application/json'
       }
     }).then((response) => {
-      console.log("Test")
-      console.log(response)
-      this.setState({ data: response.data.items })
-      console.log(this.state.data)
+      this.setState({ 
+        data: response.data.items,
+        retrievedData: true
+      })
     }
     )
   }
@@ -127,7 +73,6 @@ class App extends Component {
             <span class="navbar-brand mb-0 h1" style={{color: "white"}}><h1>Guess That Year!</h1></span>
           </nav>
           <div>
-          {/* <button onClick={notify}>Notify !</button> */}
           <ToastContainer />
         </div>
 
@@ -185,14 +130,23 @@ class App extends Component {
                     Playlists
                   </h2>
                 </div>
-                {/* /v1/me/tracks
-                <div className="col-lg colButton" onClick={() => this.selectGamePlay()}>
-                  <h2>
-                    Liked Songs
-                  </h2>
-                </div> */}
               </div>
             </div>)
+          }
+          {
+            this.state.gameType === "playlists"
+            && this.state.data.length !== 0
+            (
+
+            )
+          }
+          {
+            this.state.retrievedData
+            && this.state.data.length === 0
+            && 
+            (
+              <h1>Unable to play no saved data.</h1>
+            )
           }
           {
             this.state.token 
@@ -201,7 +155,8 @@ class App extends Component {
               <div>
 
                 <Player
-                  albums={this.state.albums}
+                  data={this.state.data}
+                  gameType={this.state.gameType}
                   />
                 </div>
             )

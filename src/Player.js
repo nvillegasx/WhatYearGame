@@ -19,7 +19,7 @@ class Player extends Component {
   };
   }
   componentDidMount (){
-    this.setState({ gameList: this.props.albums})
+    this.setState({ gameList: this.props.data})
     if(this.state.gameList.length > 0)
       this.setAlbum()
     }
@@ -27,6 +27,7 @@ class Player extends Component {
   setAlbum = () => {
     //get index
     let remainingRounds = this.state.gameList.length
+
     if( remainingRounds > 0)
     {
       let selectedIndex = this.getRandomIndex(remainingRounds)
