@@ -59,3 +59,7 @@
 .colButton:hover {
   background-color: rgba(33, 81, 212, 0.801);
 }
+
+.playlistName {
+  padding-left: 0.5%;
+}

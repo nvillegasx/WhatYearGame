@@ -20,7 +20,9 @@ class App extends Component {
         data: [],
         gameType: "",
         retrievedData: false,
-        selectedPlaylist: ""
+        selectedPlaylist: "",
+        playlistHref: "",
+        playlistDataRetrieved: false,
     };
   }
 
@@ -40,10 +42,12 @@ class App extends Component {
   // If playlist is chosen the user will get another option to 
   // select the playlist they would like to use
   selectGamePlay = (gameType) => {
+    this.setState({ gameType })
     if(gameType === "albums")
       this.getGameData('albums?limit=50')
     else
       this.getGameData(`${gameType}`)
+
   }
 
   // API call to spotify to retrieve the data to play the game
@@ -58,12 +62,60 @@ class App extends Component {
         'Content-Type' : 'application/json'
       }
     }).then((response) => {
-      this.setState({ 
-        data: response.data.items,
-        retrievedData: true
-      })
+      if(this.state.gameType !== "playlists")
+      {
+        this.setState({ 
+          data: response.data.items,
+          retrievedData: true
+        })
+      }
+      else{
+        this.setState({ 
+          data: response.data.items,
+        })
+      }
     }
     )
+  }
+
+  setPlaylistInfo = (playlistInfo) => {
+    console.log("Playlist href")
+    console.log(playlistInfo)
+    // playlistInfo.target.value gets the url of the playlist to get it's music
+    console.log(playlistInfo.target.value)
+    this.setState({ playlistHref: playlistInfo.target.value})
+
+  }
+
+  displayPlaylists = () => {
+    return this.state.data.map((playlist) => (
+      <div class="">
+        <input class="" type="radio" name="playlist" id={playlist.name} value={playlist.href} onClick={(e)=>this.setPlaylistInfo(e)}/>
+        {/* fix when clicking on the name it goes to first check box */}
+        <label class="playlistName" for={playlist.name}>
+        {playlist.name}
+        </label>
+      </div>
+    ))
+  }
+
+  
+
+  submitSelectedPlaylist = () => {
+    axios({
+      url: this.state.playlistHref,
+      method: 'get',
+      headers: { 
+        'Authorization': 'Bearer ' + this.state.token,
+        'Content-Type' : 'application/json'
+      }
+    }).then((response) => {
+      debugger
+      this.setState({ 
+        data: response.data.tracks.items,
+        retrievedData: true
+      })
+    })
   }
 
   render() {
@@ -113,11 +165,11 @@ class App extends Component {
                     </small>
               <div className="row">
                 {/* /v1/albums */}
-                <div className="col-lg colButton" onClick={() => this.selectGamePlay('albums')}>
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay("albums")}>
                   <h2>Albums</h2>
                 </div>
                 {/* /v1/me/tracks */}
-                <div className="col-lg colButton" onClick={() => this.selectGamePlay('tracks')}>
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay("tracks")}>
                   <h2>
                     Liked Songs
                   </h2>
@@ -125,7 +177,7 @@ class App extends Component {
               </div>
               <div className="row">
                 {/* /v1/me/playlists */}
-                <div className="col-lg colButton" onClick={() => this.selectGamePlay('playlists')}>
+                <div className="col-lg colButton" onClick={() => this.selectGamePlay("playlists")}>
                   <h2>
                     Playlists
                   </h2>
@@ -134,10 +186,16 @@ class App extends Component {
             </div>)
           }
           {
-            this.state.gameType === "playlists"
-            && this.state.data.length !== 0
+            this.state.data.length !== 0
+            && this.state.gameType === "playlists"
+            &&
             (
-
+              <div>
+                <h1>Select a playlist:</h1>
+                {this.displayPlaylists()}
+                <br/>
+                <button className="btn btn-lg btn-success" onClick={() => this.submitSelectedPlaylist()}>Submit</button>
+              </div>
             )
           }
           {
@@ -151,6 +209,7 @@ class App extends Component {
           {
             this.state.token 
             && this.state.data.length !== 0
+            && this.state.gameType !== "playlists"
             && (
               <div>
 
