@@ -15,11 +15,12 @@ class Player extends Component {
       gameOver: false,
       numOfCorrect: 0,
       totalAnswered: 0,
+      gameType: ""
 
   };
   }
   componentDidMount (){
-    this.setState({ gameList: this.props.data})
+    this.setState({ gameList: this.props.data, gameType: this.props.gameType})
     if(this.state.gameList.length > 0)
       this.setAlbum()
     }
@@ -31,8 +32,14 @@ class Player extends Component {
     if( remainingRounds > 0)
     {
       let selectedIndex = this.getRandomIndex(remainingRounds)
-  
-      this.setState({ selectedAlbum: this.state.gameList[selectedIndex].album})
+      // depends on game type
+      // .album
+      // .track
+      // debugger;
+      if(this.state.gameType === "albums")
+        this.setState({ selectedAlbum: this.state.gameList[selectedIndex].album})
+      else
+      this.setState({ selectedAlbum: this.state.gameList[selectedIndex].track.album})
   
       this.updateValidAlbums(selectedIndex)
     }

@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: system-ui;
+  height: 100%;
 }
 
 .App-link {
@@ -12,15 +13,16 @@
   border-color: #E7E7E7;
 }
 
-.footer {
-  position: fixed;
+/* .footer {
+position: relative;
+height: 2.5rem;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: grey;
   color: white;
   text-align: center;
-}
+} */
 
 .outer {
   position: relative;

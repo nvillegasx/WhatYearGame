@@ -4,7 +4,6 @@ import React, {
 import hash from "./hash";
 import "./App.css";
 import Player from "./Player"
-import $ from "jquery"
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
 import axios from "axios"
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome'
@@ -22,7 +21,6 @@ class App extends Component {
         retrievedData: false,
         selectedPlaylist: "",
         playlistHref: "",
-        playlistDataRetrieved: false,
     };
   }
 
@@ -79,12 +77,7 @@ class App extends Component {
   }
 
   setPlaylistInfo = (playlistInfo) => {
-    console.log("Playlist href")
-    console.log(playlistInfo)
-    // playlistInfo.target.value gets the url of the playlist to get it's music
-    console.log(playlistInfo.target.value)
     this.setState({ playlistHref: playlistInfo.target.value})
-
   }
 
   displayPlaylists = () => {
@@ -127,7 +120,6 @@ class App extends Component {
           <div>
           <ToastContainer />
         </div>
-
           {
             !this.state.token && ( 
               <div class="center">
@@ -188,6 +180,7 @@ class App extends Component {
           {
             this.state.data.length !== 0
             && this.state.gameType === "playlists"
+            && !this.state.retrievedData
             &&
             (
               <div>
@@ -209,7 +202,7 @@ class App extends Component {
           {
             this.state.token 
             && this.state.data.length !== 0
-            && this.state.gameType !== "playlists"
+            && this.state.retrievedData
             && (
               <div>
 
@@ -220,9 +213,13 @@ class App extends Component {
                 </div>
             )
           }
-        <div class="footer">
+
+{/* TODO FIX when playlist is long */}
+{/* <div class="footer navbar-fixed-bottom">
           <p>By: Nathaniel Villegas</p>
-        </div>
+        </div> */}
+    
+
       </div>
     );
   }
