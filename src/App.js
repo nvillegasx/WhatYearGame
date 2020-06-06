@@ -103,7 +103,6 @@ class App extends Component {
         'Content-Type' : 'application/json'
       }
     }).then((response) => {
-      debugger
       this.setState({ 
         data: response.data.tracks.items,
         retrievedData: true

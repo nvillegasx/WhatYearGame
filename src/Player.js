@@ -9,6 +9,7 @@ class Player extends Component {
     super();
     this.state = {
       gameList: [],
+      originalList: [],
       selectedAlbum: null,
       gameStart: true,
       userInput: "",
@@ -20,9 +21,20 @@ class Player extends Component {
   };
   }
   componentDidMount (){
-    this.setState({ gameList: this.props.data, gameType: this.props.gameType})
-    if(this.state.gameList.length > 0)
+    debugger;
+    if(this.props.data.length > 0)
+    {
+        this.setState({ 
+          gameList: this.props.data,
+          originalList: this.props.data,
+          gameType: this.props.gameType})
       this.setAlbum()
+
+      if(this.state.originalList.length === 0 && this.props.data.length !== 0)
+        this.setState({ 
+          gameOver: false,
+          originalList: this.props.data })
+    }
     }
 
   setAlbum = () => {
@@ -133,6 +145,24 @@ class Player extends Component {
     this.setState({userInput: "", totalAnswered: totalAnswered+1})
   }
 
+  restartGame = () => {
+    debugger;
+    this.setState({
+      selectedAlbum: null,
+      gameStart: true,
+      gameList: this.state.originalList, 
+      gameType: this.state.gameType,
+      userInput: "",
+      gameOver: false,
+      numOfCorrect: 0,
+      totalAnswered: 0,
+    })
+
+    if(this.state.gameList.length > 0)
+      this.setAlbum()
+    
+  }
+
   render() {
     return (
       <div className="center" style={{height: "500px", width: "300px"}}>
@@ -156,12 +186,17 @@ class Player extends Component {
               }
 
               {
-               !this.state.gameOver && this.gameList === undefined && this.displayButtons()
+               !this.state.gameOver && this.state.gameList !== undefined && this.displayButtons()
               }
               {
                 this.state.gameOver &&
                 <div>
                   <h2>Game Over</h2>
+                  <div> Stats:
+                    {this.state.numOfCorrect} out of {this.state.totalAnswered}
+                    <br/>
+                    <button className="btn btn-success btn-lg" onClick={() => this.restartGame()}>Play Again</button>
+                  </div>
                 </div>
               }
           </div>
