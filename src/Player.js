@@ -79,14 +79,14 @@ class Player extends Component {
     {
       return <div>
         <div className="">
-          <button className="btn btn-success btn-lg"onClick={()=>this.startGame()}>Set up Game</button>
+          <button className="btn btn-success btn-lg" onClick={()=>this.startGame()}>Set up Game</button>
         </div>
       </div>
     }
     else{
       return <div>
-        <button onClick={()=>this.checkUserAnswer()}>Submit</button>
-        <button>Finish</button>
+        <button className="btn btn-success btn-lg" onClick={()=>this.checkUserAnswer()}>Submit</button>
+        <button className="btn btn-danger btn-lg" onClick={()=> this.setState({ gameOver: true})}>End Game</button>
       </div>
     }
   }
@@ -110,8 +110,6 @@ class Player extends Component {
     
     if(this.state.userInput === albumYear)
     {
-      console.log("correct answer")
-      // toastr.success(`The album was released in ${albumYear}`, 'Correct!')
       this.setState({ numOfCorrect: newCorrect+1 })
       toast.success(`Correct! The album was released in ${albumYear}`, {
         position: "top-right",
@@ -122,12 +120,8 @@ class Player extends Component {
         draggable: true,
         progress: undefined,
         });
-      // this.props.container.success(`The album was released in ${albumYear}`, 'Correct', { closeButton: true })
     }
     else{
-      console.log("wrong answer")
-      // toastr.error(`The album was released in ${albumYear}`, 'Incorrect!')
-      // toast("wow so easy")
       toast.error(`Incorrect! The album was released in ${albumYear}`, {
         position: "top-right",
         autoClose: 5000,
@@ -137,8 +131,6 @@ class Player extends Component {
         draggable: true,
         progress: undefined,
         });
-
-      // this.props.container.error(`The album was released in ${albumYear}`, 'Incorrect', { closeButton: true })
     }
 
     this.setAlbum()
@@ -149,7 +141,7 @@ class Player extends Component {
     debugger;
     this.setState({
       selectedAlbum: null,
-      gameStart: true,
+      gameStart: false,
       gameList: this.state.originalList, 
       gameType: this.state.gameType,
       userInput: "",
