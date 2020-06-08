@@ -110,6 +110,10 @@ class App extends Component {
     })
   }
 
+  goToMainMenu = () => {
+    this.setState({ data: [], retrievedData: false })
+  }
+
   render() {
     return ( 
       <div className="App">
@@ -208,6 +212,7 @@ class App extends Component {
                 <Player
                   data={this.state.data}
                   gameType={this.state.gameType}
+                  goToMainMenu={this.goToMainMenu}
                   />
                 </div>
             )

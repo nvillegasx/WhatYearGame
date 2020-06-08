@@ -17,17 +17,16 @@ class Player extends Component {
       numOfCorrect: 0,
       totalAnswered: 0,
       gameType: ""
-
-  };
+    };
   }
   componentDidMount (){
-    debugger;
     if(this.props.data.length > 0)
     {
-        this.setState({ 
-          gameList: this.props.data,
-          originalList: this.props.data,
-          gameType: this.props.gameType})
+      this.setState({ 
+        gameList: this.props.data,
+        originalList: this.props.data,
+        gameType: this.props.gameType
+      })
       this.setAlbum()
 
       if(this.state.originalList.length === 0 && this.props.data.length !== 0)
@@ -37,6 +36,7 @@ class Player extends Component {
     }
     }
 
+    // sets up the data to play the game
   setAlbum = () => {
     //get index
     let remainingRounds = this.state.gameList.length
@@ -44,14 +44,11 @@ class Player extends Component {
     if( remainingRounds > 0)
     {
       let selectedIndex = this.getRandomIndex(remainingRounds)
-      // depends on game type
-      // .album
-      // .track
-      // debugger;
+
       if(this.state.gameType === "albums")
         this.setState({ selectedAlbum: this.state.gameList[selectedIndex].album})
       else
-      this.setState({ selectedAlbum: this.state.gameList[selectedIndex].track.album})
+        this.setState({ selectedAlbum: this.state.gameList[selectedIndex].track.album})
   
       this.updateValidAlbums(selectedIndex)
     }
@@ -61,19 +58,19 @@ class Player extends Component {
 
   }
 
+  // gets a random index to the the item to be displayed
   getRandomIndex = (listSize) =>{
     return Math.floor(Math.random() * listSize)
   }
 
+  // update the data that the user has no answered
   updateValidAlbums = (index) => {
     let newList = this.state.gameList
     newList.splice(index, 1)
     this.setState({ gameList: newList})
   }
-// allow users to play with what they'd like
-// playlist albums
-// artist
-// like songs
+
+  // displays the buttons for the user to submit answer, end game, and sets up game
   displayButtons = () => {
     if(this.state.gameStart === true)
     {
@@ -91,6 +88,7 @@ class Player extends Component {
     }
   }
 
+  // sets up the game by choosing the first item/question to display to the user
   startGame = () => {
     this.setAlbum()
     if(this.state.gameStart === true)
@@ -99,10 +97,12 @@ class Player extends Component {
     }
   }
 
+  // saves the users response
   setUserInput = (year) => {
     this.setState({ userInput: year})
   }
 
+  // validates the users answer and displays whether the user is correct or not
   checkUserAnswer = () =>{
     const albumYear = this.state.selectedAlbum.release_date.substring(0,4)
     let newCorrect = this.state.numOfCorrect
@@ -137,6 +137,7 @@ class Player extends Component {
     this.setState({userInput: "", totalAnswered: totalAnswered+1})
   }
 
+  // allows the user to play again
   restartGame = () => {
     debugger;
     this.setState({
@@ -180,6 +181,7 @@ class Player extends Component {
               {
                !this.state.gameOver && this.state.gameList !== undefined && this.displayButtons()
               }
+
               {
                 this.state.gameOver &&
                 <div>
@@ -188,6 +190,8 @@ class Player extends Component {
                     {this.state.numOfCorrect} out of {this.state.totalAnswered}
                     <br/>
                     <button className="btn btn-success btn-lg" onClick={() => this.restartGame()}>Play Again</button>
+                    <button className="btn btn-danger btn-lg" onClick={this.props.goToMainMenu}>Main Menu</button>
+
                   </div>
                 </div>
               }
