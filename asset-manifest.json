@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/WhatYearGame/static/css/main.3379bc10.chunk.css",
+    "main.js": "/WhatYearGame/static/js/main.6c314ee8.chunk.js",
+    "main.js.map": "/WhatYearGame/static/js/main.6c314ee8.chunk.js.map",
+    "runtime-main.js": "/WhatYearGame/static/js/runtime-main.ec468798.js",
+    "runtime-main.js.map": "/WhatYearGame/static/js/runtime-main.ec468798.js.map",
+    "static/css/2.14f3cd7d.chunk.css": "/WhatYearGame/static/css/2.14f3cd7d.chunk.css",
+    "static/js/2.907dd486.chunk.js": "/WhatYearGame/static/js/2.907dd486.chunk.js",
+    "static/js/2.907dd486.chunk.js.map": "/WhatYearGame/static/js/2.907dd486.chunk.js.map",
+    "index.html": "/WhatYearGame/index.html",
+    "precache-manifest.b7e3d728a96e7f2f732986621b12f34d.js": "/WhatYearGame/precache-manifest.b7e3d728a96e7f2f732986621b12f34d.js",
+    "service-worker.js": "/WhatYearGame/service-worker.js",
+    "static/css/2.14f3cd7d.chunk.css.map": "/WhatYearGame/static/css/2.14f3cd7d.chunk.css.map",
+    "static/css/main.3379bc10.chunk.css.map": "/WhatYearGame/static/css/main.3379bc10.chunk.css.map",
+    "static/js/2.907dd486.chunk.js.LICENSE.txt": "/WhatYearGame/static/js/2.907dd486.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec468798.js",
+    "static/css/2.14f3cd7d.chunk.css",
+    "static/js/2.907dd486.chunk.js",
+    "static/css/main.3379bc10.chunk.css",
+    "static/js/main.6c314ee8.chunk.js"
+  ]
+}
