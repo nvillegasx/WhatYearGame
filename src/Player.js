@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-// import toastr from 'toastr'
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-import "./Player.css";
 
 class Player extends Component {
   constructor() {
