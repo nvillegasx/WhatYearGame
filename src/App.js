@@ -117,20 +117,20 @@ class App extends Component {
   render() {
     return ( 
       <div className="App">
-          <nav class="navbar navbar-default">
-            <span class="navbar-brand mb-0 h1" style={{color: "white"}}><h1>Guess That Year!</h1></span>
+          <nav className="navbar navbar-default">
+            <span className="navbar-brand mb-0 h1" style={{color: "white"}}><h1>Guess That Year!</h1></span>
           </nav>
           <div>
           <ToastContainer />
         </div>
           {
             !this.state.token && ( 
-              <div class="center">
+              <div className="center">
                 <FontAwesomeIcon icon={faSpotify} size="10x" />
                 <div className="center">
                   <div style={{width: "100%"}}>
                     <h4>Guess That Year is a game that uses Spotify's Api to display
-                    album covers from a user's saved albums list. The objective of 
+                    album covers from a user's saved albums, playlists or liked songs. The objective of 
                     the game is to guess what year the album was released. How well
                     do you know your music?<br/><br/>
                     <small>
@@ -217,12 +217,6 @@ class App extends Component {
                 </div>
             )
           }
-
-{/* TODO FIX when playlist is long */}
-{/* <div class="footer navbar-fixed-bottom">
-          <p>By: Nathaniel Villegas</p>
-        </div> */}
-    
 
       </div>
     );

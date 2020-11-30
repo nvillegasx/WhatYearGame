@@ -1,7 +1,10 @@
-body {
+/* body {
     margin: 5em;
 }
-
+html, body, #root, .root{
+    height: 100%
+  }
+   */
 li {
     font-size: 18px;
     padding: 4px;

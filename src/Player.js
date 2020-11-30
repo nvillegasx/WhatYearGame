@@ -22,11 +22,12 @@ class Player extends Component {
   componentDidMount (){
     if(this.props.data.length > 0)
     {
-      this.setState({ 
-        gameList: this.props.data,
-        originalList: this.props.data,
-        gameType: this.props.gameType
-      })
+      // let albums = this.removeDuplicateAblums(this.props.data)
+        this.setState({ 
+          gameList: this.props.data,
+          originalList: this.props.data,
+          gameType: this.props.gameType
+        })
       this.setAlbum()
 
       if(this.state.originalList.length === 0 && this.props.data.length !== 0)
@@ -34,11 +35,18 @@ class Player extends Component {
           gameOver: false,
           originalList: this.props.data })
     }
-    }
+  }
 
-    // sets up the data to play the game
+  // to do fix this to remove duplicates
+  removeDuplicateAblums = (albums) => {
+    let noDuplicateAlbums = albums.filter((album,i,albums)=>
+    albums.findIndex(t=>(t.album.name === album.album.name))===i)
+    debugger;
+    return noDuplicateAlbums
+  }
+
+  // sets up the data to play the game
   setAlbum = () => {
-    //get index
     let remainingRounds = this.state.gameList.length
 
     if( remainingRounds > 0)
@@ -76,7 +84,7 @@ class Player extends Component {
     {
       return <div>
         <div className="">
-          <button className="btn btn-success btn-lg" onClick={()=>this.startGame()}>Set up Game</button>
+          <button className="btn btn-block btn-success btn-lg" onClick={()=>this.startGame()}>Start Game</button>
         </div>
       </div>
     }
@@ -108,6 +116,21 @@ class Player extends Component {
     let newCorrect = this.state.numOfCorrect
     let totalAnswered = this.state.totalAnswered
     
+    if(this.state.userInput === "" || this.state.userInput.length !== 4)
+    {
+      toast.warning(`Error, please enter a year after 1500`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+
+        return;
+    }
+
     if(this.state.userInput === albumYear)
     {
       this.setState({ numOfCorrect: newCorrect+1 })
@@ -172,7 +195,7 @@ class Player extends Component {
 
                   <div>
                     <label name="userInput">What year was this ablum released?</label>
-                    <input type="number" name="userInput"required  value={this.state.userInput} minLength="4" max="2020" onChange={((e)=>this.setUserInput(e.target.value))}></input>
+                    <input type="number" name="userInput"required  value={this.state.userInput} minLength="4" min="1500" max="2020" onChange={((e)=>this.setUserInput(e.target.value))}></input>
                   </div>
                 </div>
               </div> 
